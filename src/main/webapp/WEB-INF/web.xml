@@ -27,28 +27,6 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-
-	<filter>
-		<filter-name>securityFilter</filter-name>
-		<filter-class>my.mimos.mitrace.support.SecurityFilter</filter-class>
-		<init-param>
-			<param-name>errorPage</param-name>
-			<param-value>/illegal/securityError.htm</param-value>
-		</init-param>
-		<init-param>
-			<param-name>licenseErrorPage</param-name>
-			<param-value>/illegal/licenseError.htm</param-value>
-		</init-param>
-		<init-param>
-			<param-name>ajaxErrorStatusCode</param-name>
-			<param-value>999</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>securityFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -95,7 +73,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>org.sourcetree.interview.support.WebContextListener</listener-class>
+		<listener-class>org.sourcetree.support.web.WebContextListener</listener-class>
 	</listener>
 	<listener>
 		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
