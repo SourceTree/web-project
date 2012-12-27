@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright © 2012, Source Tree Solutions (M) SDN BHD, All Rights Reserved -->
+<ehcache>
+
+	<diskStore path="java.io.tmpdir" />
+
+	<!-- <cache name="sampleCache" eternal="false" maxElementsInMemory="100"
+		timeToLiveSeconds="0" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="1" memoryStoreEvictionPolicy="LRU">
+		<cacheEventListenerFactory
+			class="org.sourcetree.support.cache.NullCacheEventListenerFactory" />
+	</cache> -->
+</ehcache>

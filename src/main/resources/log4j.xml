@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright © 2012, Source Tree Solutions (M) SDN BHD, All Rights Reserved -->
+<!DOCTYPE log4j:configuration
+        PUBLIC "-//Apache//DTD Log4j 1.2//EN"
+        "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="txtlog" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.base}/logs/app-web.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="1MB" />
+		<param name="MaxBackupIndex" value="100" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%-5p %d{ddMMMyyyy HH:mm:ss,SSS}(%-20C{1}:%4L)[%.10t] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%-5p %d{ddMMMyyyy HH:mm:ss,SSS}(%-20C{1}:%4L)[%.10t] %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="org.sourcetree" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="txtlog" />
+	</logger>
+	<logger name="org.hibernate" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="txtlog" />
+	</logger>
+	<logger name="org.hibernate.SQL" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="txtlog" />
+	</logger>
+	<logger name="org.hibernate.type" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="txtlog" />
+	</logger>
+	<logger name="org.hibernate.transaction" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="txtlog" />
+	</logger>
+	<logger name="org.springframework" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="txtlog" />
+	</logger>
+
+	<root>
+		<level value="ERROR" />
+		<appender-ref ref="txtlog" />
+	</root>
+
+</log4j:configuration>

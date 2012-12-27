@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright © 2012, Source Tree Solutions (M) SDN BHD, All Rights Reserved -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" default-autowire="byName"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+	<mvc:annotation-driven />
+
+	<aop:aspectj-autoproxy />
+
+	<mvc:interceptors>
+		<bean id="noCache" class="org.sourcetree.support.web.filter.NoCacheHeaderInterceptor"
+			init-method="initializeMap">
+			<property name="excludeURI">
+				<list>
+					<value>.css</value>
+					<value>.js</value>
+					<value>.jpg</value>
+					<value>.png</value>
+					<value>.gif</value>
+					<value>.JPEG</value>
+					<value>.PNG</value>
+				</list>
+			</property>
+		</bean>
+
+		<bean id="themeChangeInterceptor"
+			class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"
+			p:paramName="app-theme" />
+	</mvc:interceptors>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:order="2" p:prefix="/WEB-INF/page/" p:suffix=".jsp" />
+
+	<bean id="themeSource"
+		class="org.springframework.ui.context.support.ResourceBundleThemeSource"
+		p:basenamePrefix="theme-" />
+
+	<bean id="themeResolver"
+		class="org.springframework.web.servlet.theme.CookieThemeResolver"
+		p:defaultThemeName="default" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>
+
+	<mvc:resources mapping="/static/images/**" location="/static/images/" />
+	<mvc:resources mapping="/static/styles/**" location="/static/styles/" />
+	<mvc:resources mapping="/static/scripts/**" location="/static/scripts/" />
+
+	<mvc:view-controller path="/" view-name="redirect:/home" />
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<util:list id="beanList">
+				<ref bean="stringHttpMessageConverter" />
+				<ref bean="formHttpMessageConverter" />
+				<ref bean="marshallingHttpMessageConverter" />
+				<ref bean="jacksonMessageConverter" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter" />
+
+	<bean id="formHttpMessageConverter"
+		class="org.springframework.http.converter.FormHttpMessageConverter" />
+
+	<bean id="marshallingHttpMessageConverter"
+		class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+		<property name="marshaller" ref="jaxb2Marshaller" />
+		<property name="unmarshaller" ref="jaxb2Marshaller" />
+	</bean>
+
+	<bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="classesToBeBound">
+			<list>
+				<value>org.sourcetree.dto.ResponseDTO</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jacksonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"
+		p:objectMapper-ref="jaxbJacksonObjectMapper" />
+	<bean id="jaxbJacksonObjectMapper"
+		class="org.sourcetree.support.marshalling.JaxbJacksonObjectMapper" />
+
+	<context:component-scan base-package="org.sourcetree.controller" />
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+		p:basenames="classpath:messages,classpath:app-test" p:fileEncodings="UTF-8"
+		p:defaultEncoding="UTF-8" />
+
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionAttribute" value="error" />
+		<property name="defaultErrorView" value="error/exception" />
+		<property name="exceptionMappings">
+			<props>
+				<prop key="NullPointerException">error/exception</prop>
+				<prop key="NoSuchDataException">error/unauthorized</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>
