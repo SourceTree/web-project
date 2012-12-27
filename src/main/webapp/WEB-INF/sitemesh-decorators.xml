@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright © 2012, Source Tree Solutions (M) SDN BHD, All Rights Reserved -->
+<decorators defaultdir="/WEB-INF/page/decorators">
+
+	<excludes>
+		<pattern>/WEB-INF/page/common/*</pattern>
+	</excludes>
+
+	<decorator name="layer1Default" page="layer1Default.jsp">
+	</decorator>
+	
+	<decorator name="layer2" page="layer2.jsp">
+	</decorator>
+
+	<decorator name="layer3" page="layer3.jsp">
+		<pattern>/WEB-INF/page/*.jsp</pattern>
+	</decorator>
+</decorators>

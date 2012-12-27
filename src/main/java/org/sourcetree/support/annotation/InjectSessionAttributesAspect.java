@@ -32,10 +32,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 @Component
 @Aspect
-public class InjectSessionAttributeAspect
+public class InjectSessionAttributesAspect
 {
 	private static final Log LOG = LogFactory
-			.getLog(InjectSessionAttributeAspect.class);
+			.getLog(InjectSessionAttributesAspect.class);
 
 	/**
 	 * pointcut for <code>InjectSessionAttributes</code> annotation

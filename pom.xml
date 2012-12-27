@@ -308,6 +308,14 @@
 			<version>1.6.11</version>
 		</dependency>
 
+		<!-- Hibernate Encryptor -->
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>1.8</version>
+		</dependency>
+		
+		<!-- Servlet & JSP -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
