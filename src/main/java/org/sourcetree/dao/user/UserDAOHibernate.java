@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
  * 
  * @author Venkaiah Chowdary Koneru
  */
- @Repository
+@Repository
 public class UserDAOHibernate extends GenericDAOHibernate<User, Long> implements
 		UserDAO
 {
