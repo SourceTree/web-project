@@ -12,12 +12,14 @@ package org.sourcetree.dao.user;
 
 import org.sourcetree.dao.GenericDAOHibernate;
 import org.sourcetree.entity.User;
+import org.springframework.stereotype.Repository;
 
 /**
  * UserDAO interface implementation
  * 
  * @author Venkaiah Chowdary Koneru
  */
+ @Repository
 public class UserDAOHibernate extends GenericDAOHibernate<User, Long> implements
 		UserDAO
 {
