@@ -153,6 +153,18 @@
 			<version>1.4.5</version>
 		</dependency>
 
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+
 		<!-- Ehcache -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
@@ -319,7 +331,7 @@
 			<artifactId>jasypt</artifactId>
 			<version>1.8</version>
 		</dependency>
-		
+
 		<!-- Servlet & JSP -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
